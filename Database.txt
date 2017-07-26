@@ -1,0 +1,197 @@
+-- phpMyAdmin SQL Dump
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jul 26, 2017 at 06:26 PM
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 7.1.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `android`
+--
+CREATE DATABASE IF NOT EXISTS `android` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `android`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `faculty`
+--
+
+CREATE TABLE `faculty` (
+  `name` varchar(30) NOT NULL,
+  `mobileno` varchar(10) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `password` varchar(30) NOT NULL,
+  `dept` varchar(30) NOT NULL,
+  `designation` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `faculty`
+--
+
+INSERT INTO `faculty` (`name`, `mobileno`, `email`, `password`, `dept`, `designation`) VALUES
+('Giri', '9876541123', 'giri@gmail.com', '1234', 'computer science', 'Dean'),
+('Rashmi N', '9876543210', 'rashmi@gmail.com', '1234', 'Computer Science', 'Assistant Professor'),
+('vamshi', '8759461230', 'vamshi@gmail.com', '12345', 'Computer Science', 'HOD');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `facultynotice`
+--
+
+CREATE TABLE `facultynotice` (
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `title` varchar(100) NOT NULL,
+  `content` varchar(1500) NOT NULL,
+  `sender` varchar(30) NOT NULL,
+  `sendermail` varchar(30) NOT NULL,
+  `receiver` varchar(30) NOT NULL,
+  `type` varchar(30) NOT NULL,
+  `dept` varchar(30) NOT NULL,
+  `designation` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `facultynotice`
+--
+
+INSERT INTO `facultynotice` (`datetime`, `title`, `content`, `sender`, `sendermail`, `receiver`, `type`, `dept`, `designation`) VALUES
+('2017-06-06 18:30:49', 'Meeting at 4pm', 'To talk about the developments', 'principal', 'sourab@gmail.com', 'vamshi', 'Individual', 'Computer Science', 'HOD'),
+('2017-06-06 18:43:06', 'Exam dates meeting', 'We need to fix the dates for the sem end examination', 'principal', 'sourab@gmail.com', 'vamshi', 'Individual', 'Computer Science', 'HOD'),
+('2017-06-06 18:43:57', 'Greeting', 'Hello, good morning and welcome to the college', 'principal', 'sourab@gmail.com', 'vamshi', 'Individual', 'Computer Science', 'HOD');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hierarchy`
+--
+
+CREATE TABLE `hierarchy` (
+  `id` int(11) NOT NULL,
+  `designation` varchar(30) NOT NULL,
+  `value` varchar(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `hierarchy`
+--
+
+INSERT INTO `hierarchy` (`id`, `designation`, `value`) VALUES
+(1, 'principal', '1'),
+(2, 'dean', '2'),
+(7, 'hod', '3'),
+(10, 'associate professor', '4'),
+(11, 'assistant professor', '5');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `principal`
+--
+
+CREATE TABLE `principal` (
+  `name` varchar(30) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `password` varchar(30) NOT NULL,
+  `mobileno` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `principal`
+--
+
+INSERT INTO `principal` (`name`, `email`, `password`, `mobileno`) VALUES
+('sourab', 'sourab@gmail.com', '12345', '9663568435');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student`
+--
+
+CREATE TABLE `student` (
+  `name` varchar(30) NOT NULL,
+  `usn` varchar(30) NOT NULL,
+  `mobileno` varchar(10) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `dept` varchar(30) NOT NULL,
+  `sem` varchar(3) NOT NULL,
+  `section` varchar(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `studentnotice`
+--
+
+CREATE TABLE `studentnotice` (
+  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `title` varchar(50) NOT NULL,
+  `content` varchar(1500) NOT NULL,
+  `sender` varchar(30) NOT NULL,
+  `sendermail` varchar(30) NOT NULL,
+  `receiver` varchar(30) NOT NULL,
+  `type` varchar(30) NOT NULL,
+  `dept` varchar(50) NOT NULL,
+  `sem` varchar(3) NOT NULL,
+  `section` varchar(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `faculty`
+--
+ALTER TABLE `faculty`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Indexes for table `facultynotice`
+--
+ALTER TABLE `facultynotice`
+  ADD PRIMARY KEY (`datetime`);
+
+--
+-- Indexes for table `hierarchy`
+--
+ALTER TABLE `hierarchy`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `principal`
+--
+ALTER TABLE `principal`
+  ADD PRIMARY KEY (`email`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`usn`);
+
+--
+-- Indexes for table `studentnotice`
+--
+ALTER TABLE `studentnotice`
+  ADD PRIMARY KEY (`datetime`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `hierarchy`
+--
+ALTER TABLE `hierarchy`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
